@@ -1,12 +1,13 @@
 import express from 'express';
+import { validateApiKey } from '../middlewares/errorHandler.js';
 import { getAllEvents, getEventById, createEvent, updateEvent, deleteEvent } from '../controller/eventController.js';
 
 const router = express.Router();
 
-router.get('/', getAllEvents);
-router.get('/:id', getEventById);
-router.post('/', createEvent);
-router.put('/:id', updateEvent);
-router.delete('/:id', deleteEvent);
+router.get('/', validateApiKey, getAllEvents);
+router.get('/:id', validateApiKey, getEventById);
+router.post('/', validateApiKey, createEvent);
+router.put('/:id', validateApiKey, updateEvent);
+router.delete('/:id', validateApiKey, deleteEvent);
 
 export default router;
