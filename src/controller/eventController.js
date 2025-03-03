@@ -1,8 +1,16 @@
 import eventService from '../services/eventService.js';
 
 export const getAllEvents = async (req, res, next) => {
+    let events;
     try {
-        const events = await eventService.getAllEvents();
+        if(req.query.location){
+            events = await eventService.getEventByLocation(req.query.location);
+            if (!events) {
+                return res.status(404).json({ message: 'No events were found', location: req.query.location });
+            }
+            return res.json(events);
+        }
+        events = await eventService.getAllEvents();
         
         if (!events) {
             return res.status(404).json({ message: 'No events were found' });

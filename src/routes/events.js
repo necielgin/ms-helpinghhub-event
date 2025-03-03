@@ -10,4 +10,5 @@ router.post('/', validateApiKey, createEvent);
 router.put('/:id', validateApiKey, updateEvent);
 router.delete('/:id', validateApiKey, deleteEvent);
 
+
 export default router;
