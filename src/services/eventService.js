@@ -3,10 +3,10 @@ import {geoCoderAddress} from './geocoder.js';
 
 const getAllEvents = async () => {
     console.log("getting the list of all the different events")
-    const { data, error } = await supabase
+    const { data, error, count } = await supabase
     .schema('HHTest')
     .from('Events')
-    .select();
+    .select('*', { count: 'exact' });
 
     if (error)  
     {
@@ -14,7 +14,7 @@ const getAllEvents = async () => {
         throw error;
     }
     console.log("data was retrieved successfully")
-    return data;
+    return {data, count};
 };
 
 const getEventById = async (eventId) => {
