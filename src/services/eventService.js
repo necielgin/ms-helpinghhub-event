@@ -14,7 +14,10 @@ const getAllEvents = async () => {
         throw error;
     }
     console.log("data was retrieved successfully")
-    return {data, count};
+    return {
+        events: data,
+        count: data.length,
+    }
 };
 
 const getEventById = async (eventId) => {
